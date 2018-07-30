@@ -62,7 +62,7 @@ function purchaseIt(item) {
 // Display shopping cart
 //console.log("\n-- The following items have been added to your shopping cart --");
 for (var k = 0; k < purchased.length; k++) {
-    //console.log(purchased[k].constructor.name + ": " + purchased[k].title);
+    console.log(purchased[k].constructor.name + ": " + purchased[k].title);
 }
 
 // Matt's Code
@@ -116,6 +116,6 @@ driveIt(jeep);
 // Looping over the racetrack array
 console.log("\n-- The following vehicles are in the race! --")
 for(let vehicle of racetrack) {
-    console.log(vehicle.model);
+    console.log(vehicle.constructor.name + ": " + vehicle.model);
 }
 
