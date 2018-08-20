@@ -1,0 +1,56 @@
+<!-- 
+============================================
+; Title: Exercise 4.3
+; Author: Professor Krasso
+; Date: 20 August 2018
+; Modified By: Matthew Smith
+; Description: This program demonstrates
+; how to use HTTP PUT and DELETE.
+;===========================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smith - Exercise 4.3</title>
+
+    <!-- jQuery reference -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+    <button id="the-button">
+        The Button
+    </button>
+
+<script>
+
+    $(function() {
+        $('#the-button').click(function() {
+            $.ajax({
+                url: "http://httpbin.org/delete",
+                dataType: "json",
+                type: "DELETE",
+                data: {
+                    blorp: "bleep",
+                    yep: "nope",
+                    lies: true,
+                    one: 5
+                },
+                success: function(data, status) {
+                    console.log("Blorp: " + data.form.blorp +
+                                "\nYep: " + data.form.yep +
+                                "\nLies: " + data.form.lies +
+                                "\nOne: " + data.form.one +
+                                "\nStatus: " + status);
+                }
+            })
+        });
+    });
+
+</script>
+
+</body>
+</html>
