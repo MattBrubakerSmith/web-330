@@ -1,0 +1,42 @@
+<!-- 
+============================================
+; Title: Exercise 4.2
+; Author: Professor Krasso
+; Date: 20 August 2018
+; Modified By: Matthew Smith
+; Description: This program demonstrates
+; how to use jQuery AJAX for asynchrounous
+; HTTP request operations.
+;===========================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smith - Exercise 4.2</title>
+
+    <!-- jQuery reference -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+    <button id="the-button">
+        The Button
+    </button>
+
+<script>
+
+    $(function() {
+        $('#the-button').click(function() {
+            $.get("https://dog.ceo/api/breeds/image/random", function(data, status) {
+                console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+            });
+        });
+    });
+
+</script>
+
+</body>
+</html>
