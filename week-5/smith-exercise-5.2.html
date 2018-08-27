@@ -1,0 +1,43 @@
+<!-- 
+============================================
+; Title: Exercise 5.2
+; Author: Professor Krasso
+; Date: 27 August 2018
+; Modified By: Matthew Smith
+; Description: This program demonstrates
+; how to use the jQuery.proxy() method.
+;===========================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Smith - Exercise 5.2</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Proxy Example</h2>
+        <button class="btn btn-primary" id="exampleBtn">Run Test</button>
+        <p id="proxyExample"></p>
+    </div>
+
+    <!-- jquery Reference Library -->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+        var pastry = {
+            type: "Danish",
+            filling: "Brie and guava",
+            display: function(el) {
+                el.html("");
+                el.append("<br><b>Type:</b> " + this.type + "<br><b>Filling:</b> " + this.filling);
+            }
+        }
+
+        $("#exampleBtn").click($.proxy(pastry, "display", $("#proxyExample")));
+    </script>
+</body>
+</html>
