@@ -1,0 +1,52 @@
+<!-- 
+============================================
+; Title: Exercise 6.3
+; Author: Professor Krasso
+; Date: 5 September 2018
+; Modified By: Matthew Smith
+; Description: This program demonstrates
+; how to ViewModel object literals.
+;===========================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Smith - Exercise 6.3</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- JavaScript Libraries -->
+    <script src="../knockout-3.4.2.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" class="form-control alert-warning" data-bind="value: firstName" />
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" class="form-control alert-warning" data-bind="value: lastName" />
+        </div>
+        <div class="form-group">
+            <label for="emailAddress">Email:</label>
+            <input type="text" id="emailAddress" class="form-control alert-warning" data-bind="value: emailAddress" />
+        </div>
+    </div>
+<script>
+    var personViewModel = {
+        firstName: "Count",
+        lastName: "Chocula",
+        emailAddress: "cocoabware@surrealcereal.io"
+    }
+    ko.applyBindings(personViewModel);
+</script>
+
+</body>
+</html>
