@@ -1,0 +1,71 @@
+<!-- 
+============================================
+; Title: Assignment 7.4
+; Author: Professor Krasso
+; Date: 10 September 2018
+; Modified By: Matthew Smith
+; Description: This program demonstrates
+; how to use additional KnockoutJS bindings.
+;===========================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Assignment 7.4</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- JavaScript Libraries -->
+    <script src="../knockout-3.4.2.js"></script>
+</head>
+<body>
+    <div class="container my-4">
+        <h2>Other Binding Examples</h2>
+        <table class="table table-dark table-striped table-hover mt-4">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: tutorials">
+                <tr>
+                    <td data-bind="text: title"></td>
+                    <td data-bind="text: description"></td>
+                    <td>
+                        <a data-bind="text: link, attr: {href: link, target: '_blank'}, style: {color: 'white', fontStyle: 'italic'}"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function JavaScriptTutorialViewModel() {
+            let self = this;
+            self.tutorials = ko.observableArray([
+                new Tutorial("W3Schools", "JavaScript is the programming language of HTML and the Web. JavaScript is easy to learn. This tutorial will teach you JavaScript from basic to advanced.", "https://www.w3schools.com/js/"),
+                new Tutorial("Codecademy", "Learn JavaScript and Javascript arrays to build interactive websites and pages that adapt to every device.", "https://www.codecademy.com/learn/introduction-to-javascript"),
+                new Tutorial("Learn JS", "Learn-JS.org is a free interactive JavaScript tutorial for people who want to learn JavaScript, fast.", "https://www.learn-js.org/"),
+                new Tutorial("Guru99", "Class Summary JavaScript is an open source & most popular client side scripting language supported by all browsers.", "https://www.guru99.com/interactive-javascript-tutorials.html"),
+                new Tutorial("Geeks for Geeks", "Geeks for Geeks JavaScript tutorial.", "https://www.geeksforgeeks.org/javascript-tutorial/")
+            ]);
+        }
+        
+        function Tutorial(title, desc, link) {
+            this.title = title;
+            this.description = desc;
+            this.link = link;
+        }
+
+        ko.applyBindings(new JavaScriptTutorialViewModel());
+    </script>
+
+</body>
+</html>
