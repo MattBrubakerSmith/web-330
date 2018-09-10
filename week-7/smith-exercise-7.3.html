@@ -1,0 +1,57 @@
+<!-- 
+============================================
+; Title: Exercise 7.3
+; Author: Professor Krasso
+; Date: 10 September 2018
+; Modified By: Matthew Smith
+; Description: This program demonstrates
+; how to use the KnockoutJS foreach binding.
+;===========================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Exercise 7.3</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- JavaScript Libraries -->
+    <script src="../knockout-3.4.2.js"></script>
+</head>
+<body>
+    <div class="container my-4">
+        <h2>Foreach Binding Example</h2>
+        <table class="table table-dark table-striped table-hover mt-4">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: textbooks">
+                <tr>
+                    <td data-bind="text: title"></td>
+                    <td data-bind="text: price"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function TextbookViewModel() {
+            let self = this;
+            this.textbooks = ko.observableArray([
+                {title: "JavaScript: A Love Story", price: "$299.99"},
+                {title: "American History - Whitewashed Edition", price: "$349.95"},
+                {title: "Convenient Science: Science Minus the Complicated Stuff", price: "$580.00"},
+                {title: "A Guide to Books and How to Read Them", price: "$79852378.388"}
+            ]);
+        }
+        ko.applyBindings(new TextbookViewModel());
+    </script>
+</body>
+</html>
