@@ -1,0 +1,83 @@
+<!-- 
+============================================
+; Title: Exercise 8.2
+; Author: Professor Krasso
+; Date: 12 September 2018
+; Modified By: Matthew Smith
+; Description: This program demonstrates
+; how to use the Create and Read CRUD operations.
+;===========================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Exercise 8.2</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- JavaScript Libraries -->
+    <script src="../knockout-3.4.2.js"></script>
+</head>
+<body>
+    <div role="main" class="container mt-4">
+        <h2>CR Example</h2>
+        <div class="row mt-4" data-bind="if: error">
+            <div class="col-sm-12">
+                <div class="alert alert-danger" role="alert">
+                    <strong>Warning! </strong><span data-bind="text: error"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card card-inverse">
+                    <div class="card-block p-3">
+                        <h3 class="card-title">Employee List</h3>
+                        <div class="card-text">
+                            <div class="form-group row">
+                                <label for="txtName" class="col-2 col-form-label text-nowrap">Name: </label>
+                                <div class="col-6">
+                                   <input type="text" class="form-control" id="txtName" data-bind="value: nameToAdd, valueUpdate: 'afterkeydown'">
+                                </div>
+                                <div class="col-4">
+                                    <a href="#" class="btn btn-primary" data-bind="click: add">Add</a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtEmployeeList">Employee List: </label>
+                                <select name="txtEmployeeList" id="txtEmployeeList" class="form-control" size="10" data-bind="options: employeeList"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function EmployeeViewModel() {
+            let self = this;
+            self.nameToAdd = ko.observable("");
+            self.employeeList = ko.observableArray(["Gertrude", "Bob", "Bertha"]);
+            self.error = ko.observable();
+            self.add = function() {
+                if((self.nameToAdd() !== "") && (self.employeeList.indexOf(self.nameToAdd()) === -1)) {
+                    self.error("");
+                    self.employeeList.push(self.nameToAdd());
+                }
+                else {
+                    this.error("Duplicate or Invalid Entry!");
+                }
+
+                this.nameToAdd("");
+            }
+        }
+        ko.applyBindings(new EmployeeViewModel());
+    </script>
+</body>
+</html>
