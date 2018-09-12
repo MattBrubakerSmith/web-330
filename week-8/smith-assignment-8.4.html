@@ -1,11 +1,11 @@
 <!-- 
 ============================================
-; Title: Exercise 8.3
+; Title: Assignment 8.4
 ; Author: Professor Krasso
 ; Date: 12 September 2018
 ; Modified By: Matthew Smith
 ; Description: This program demonstrates
-; how to use the Update and Delete CRUD operations.
+; how to use all of the CRUD operations!
 ;===========================================
 -->
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Exercise 8.3</title>
+    <title>Assignment 8.4</title>
 
     <!-- Stylesheet - Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
@@ -28,14 +28,23 @@
 </head>
 <body>
     <div role="main" class="container mt-4">
-        <div class="row" data-bind="if: error">
+        <div class="row my-4" data-bind="if: error">
             <div class="col-sm-12">
                 <div role="alert" class="alert alert-danger">
-                    <strong>Worning! </strong><span data-bind="text: error"></span>
+                    <strong>Warning! </strong><span data-bind="text: error()"></span>
                 </div>
             </div>
         </div>
-        <h2 class="mt-4">UD Example</h2>
+        <h2 class="mt-4">CRUD Example</h2>
+        <div class="form-group row my-4">
+            <label for="addName" class="col-2 col-form-label text-nowrap">Name: </label>
+            <div class="col-6">
+                <input type="text" class="form-control" id="addName" data-bind="value: name, valueUpdate: 'afterkeydown'">
+            </div>
+            <div class="col-4">
+                <a href="#" class="btn btn-primary" data-bind="click: add">Add</a>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-8">
                 <div class="card card-inverse">
@@ -79,8 +88,8 @@
                         <h3 class="card-title">Employee</h3>
                         <div class="card-text">
                             <div class="form-group">
-                                <label for="txtName">Name: </label>
-                                <input type="text" id="txtName" class="form-control" data-bind="value: employee().name">
+                                <label for="editName">Name: </label>
+                                <input type="text" id="editName" class="form-control" data-bind="value: employee().name">
                             </div>
                             <div class="form-group float-right">
                                 <button class="btn btn-group btn-danger" data-bind="click: $root.cancel">Cancel</button>
@@ -115,6 +124,20 @@
             self.employee = ko.observable();
             self.employees = ko.observableArray(employeeList);
 
+            self.add = function() {
+                if((self.name() !== "")) {
+                    if(!checkforDupes(self.name())) {
+                        let index = self.employees().length > 0 ? parseInt(self.employees()[self.employees().length - 1].id + 1) : 1;
+                        self.employees.push(new Employee(index, self.name()));
+                    }
+                    else {
+                        self.error(self.name() + " is a duplicate entry!");
+                    }
+                }
+                else {
+                    self.error("You must enter a value!");
+                }
+            }
             self.edit = function(emp) {
                 self.employee(emp);
             }
@@ -137,9 +160,18 @@
                 }
                 self.cancel();
             }
+
+            function checkforDupes(name) {
+                let isDupe = false;
+                for(let e of self.employees()) {
+                    if(name === e.name) {
+                        isDupe = true;
+                    }
+                }
+                return isDupe;
+            }
         }
         ko.applyBindings(new EmployeeViewModel());
     </script>
-
 </body>
 </html>
